@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
-import React from "react";
-import { InnerSlider } from "./inner-slider";
-import json2mq from "json2mq";
-import defaultProps from "./default-props";
-import { canUseDOM } from "./utils/innerSliderUtils";
-const enquire = canUseDOM() && require("enquire.js");
+import React from 'react';
+import { InnerSlider } from './inner-slider';
+import json2mq from 'json2mq';
+import defaultProps from './default-props';
+import { canUseDOM } from './utils/innerSliderUtils';
+const enquire = canUseDOM() && require('enquire.js');
 
 export default class Slider extends React.Component {
   constructor(props) {
@@ -16,7 +16,7 @@ export default class Slider extends React.Component {
     this._responsiveMediaHandlers = [];
   }
 
-  innerSliderRefHandler = ref => (this.innerSlider = ref);
+  innerSliderRefHandler = (ref) => (this.innerSlider = ref);
 
   media(query, handler) {
     // javascript handler for  css media query
@@ -32,9 +32,7 @@ export default class Slider extends React.Component {
     //whyDidYouUpdate(React)
     //}
     if (this.props.responsive) {
-      let breakpoints = this.props.responsive.map(
-        breakpt => breakpt.breakpoint
-      );
+      let breakpoints = this.props.responsive.map((breakpt) => breakpt.breakpoint);
       // sort them in increasing order of their numerical value
       breakpoints.sort((x, y) => x - y);
 
@@ -67,6 +65,23 @@ export default class Slider extends React.Component {
     }
   }
 
+  onInnerResize = (rect) => {
+    const { responsive } = this.props;
+    if (responsive && rect) {
+      const { width } = rect;
+
+      // find next effective breakpoint (without mutating the original responsive array)
+      const nextBreakpoint = responsive
+        .map((resp) => resp.breakpoint)
+        .sort((a, b) => a - b)
+        .find((brkp) => brkp >= width);
+
+      if (nextBreakpoint) {
+        this.setState({ breakpoint: nextBreakpoint });
+      }
+    }
+  };
+
   componentWillUnmount() {
     this._responsiveMediaHandlers.forEach(function(obj) {
       enquire.unregister(obj.query, obj.handler);
@@ -77,60 +92,37 @@ export default class Slider extends React.Component {
 
   slickNext = () => this.innerSlider.slickNext();
 
-  slickGoTo = (slide, dontAnimate = false) =>
-    this.innerSlider.slickGoTo(slide, dontAnimate);
+  slickGoTo = (slide, dontAnimate = false) => this.innerSlider.slickGoTo(slide, dontAnimate);
 
-  slickPause = () => this.innerSlider.pause("paused");
+  slickPause = () => this.innerSlider.pause('paused');
 
-  slickPlay = () => this.innerSlider.autoPlay("play");
+  slickPlay = () => this.innerSlider.autoPlay('play');
 
   render() {
     var settings;
     var newProps;
     if (this.state.breakpoint) {
-      newProps = this.props.responsive.filter(
-        resp => resp.breakpoint === this.state.breakpoint
-      );
+      newProps = this.props.responsive.filter((resp) => resp.breakpoint === this.state.breakpoint);
       settings =
-        newProps[0].settings === "unslick"
-          ? "unslick"
-          : { ...defaultProps, ...this.props, ...newProps[0].settings };
+        newProps[0].settings === 'unslick' ? 'unslick' : { ...defaultProps, ...this.props, ...newProps[0].settings };
     } else {
       settings = { ...defaultProps, ...this.props };
     }
 
     // force scrolling by one if centerMode is on
     if (settings.centerMode) {
-      if (
-        settings.slidesToScroll > 1 &&
-        process.env.NODE_ENV !== "production"
-      ) {
-        console.warn(
-          `slidesToScroll should be equal to 1 in centerMode, you are using ${
-            settings.slidesToScroll
-          }`
-        );
+      if (settings.slidesToScroll > 1 && process.env.NODE_ENV !== 'production') {
+        console.warn(`slidesToScroll should be equal to 1 in centerMode, you are using ${settings.slidesToScroll}`);
       }
       settings.slidesToScroll = 1;
     }
     // force showing one slide and scrolling by one if the fade mode is on
     if (settings.fade) {
-      if (settings.slidesToShow > 1 && process.env.NODE_ENV !== "production") {
-        console.warn(
-          `slidesToShow should be equal to 1 when fade is true, you're using ${
-            settings.slidesToShow
-          }`
-        );
+      if (settings.slidesToShow > 1 && process.env.NODE_ENV !== 'production') {
+        console.warn(`slidesToShow should be equal to 1 when fade is true, you're using ${settings.slidesToShow}`);
       }
-      if (
-        settings.slidesToScroll > 1 &&
-        process.env.NODE_ENV !== "production"
-      ) {
-        console.warn(
-          `slidesToScroll should be equal to 1 when fade is true, you're using ${
-            settings.slidesToScroll
-          }`
-        );
+      if (settings.slidesToScroll > 1 && process.env.NODE_ENV !== 'production') {
+        console.warn(`slidesToScroll should be equal to 1 when fade is true, you're using ${settings.slidesToScroll}`);
       }
       settings.slidesToShow = 1;
       settings.slidesToScroll = 1;
@@ -141,36 +133,23 @@ export default class Slider extends React.Component {
 
     // Children may contain false or null, so we should filter them
     // children may also contain string filled with spaces (in certain cases where we use jsx strings)
-    children = children.filter(child => {
-      if (typeof child === "string") {
+    children = children.filter((child) => {
+      if (typeof child === 'string') {
         return !!child.trim();
       }
       return !!child;
     });
 
     // rows and slidesPerRow logic is handled here
-    if (
-      settings.variableWidth &&
-      (settings.rows > 1 || settings.slidesPerRow > 1)
-    ) {
-      console.warn(
-        `variableWidth is not supported in case of rows > 1 or slidesPerRow > 1`
-      );
+    if (settings.variableWidth && (settings.rows > 1 || settings.slidesPerRow > 1)) {
+      console.warn(`variableWidth is not supported in case of rows > 1 or slidesPerRow > 1`);
       settings.variableWidth = false;
     }
     let newChildren = [];
     let currentWidth = null;
-    for (
-      let i = 0;
-      i < children.length;
-      i += settings.rows * settings.slidesPerRow
-    ) {
+    for (let i = 0; i < children.length; i += settings.rows * settings.slidesPerRow) {
       let newSlide = [];
-      for (
-        let j = i;
-        j < i + settings.rows * settings.slidesPerRow;
-        j += settings.slidesPerRow
-      ) {
+      for (let j = i; j < i + settings.rows * settings.slidesPerRow; j += settings.slidesPerRow) {
         let row = [];
         for (let k = j; k < j + settings.slidesPerRow; k += 1) {
           if (settings.variableWidth && children[k].props.style) {
@@ -183,7 +162,7 @@ export default class Slider extends React.Component {
               tabIndex: -1,
               style: {
                 width: `${100 / settings.slidesPerRow}%`,
-                display: "inline-block"
+                display: 'inline-block'
               }
             })
           );
@@ -201,14 +180,14 @@ export default class Slider extends React.Component {
       }
     }
 
-    if (settings === "unslick") {
-      const className = "regular slider " + (this.props.className || "");
+    if (settings === 'unslick') {
+      const className = 'regular slider ' + (this.props.className || '');
       return <div className={className}>{newChildren}</div>;
     } else if (newChildren.length <= settings.slidesToShow) {
       settings.unslick = true;
     }
     return (
-      <InnerSlider ref={this.innerSliderRefHandler} {...settings}>
+      <InnerSlider ref={this.innerSliderRefHandler} onResize={this.onInnerResize} {...settings}>
         {newChildren}
       </InnerSlider>
     );
