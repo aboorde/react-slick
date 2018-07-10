@@ -185,6 +185,7 @@ export default class Slider extends React.Component {
       return <div className={className}>{newChildren}</div>;
     } else if (newChildren.length <= settings.slidesToShow) {
       settings.unslick = true;
+      settings.className += ' unslicked';
     }
     return (
       <InnerSlider ref={this.innerSliderRefHandler} onResize={this.onInnerResize} {...settings}>
