@@ -323,6 +323,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      );
 	    } else if (newChildren.length <= settings.slidesToShow) {
 	      settings.unslick = true;
+	      settings.className += ' unslicked';
 	    }
 	    return _react2.default.createElement(
 	      _innerSlider.InnerSlider,
