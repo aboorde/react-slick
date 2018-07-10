@@ -347,7 +347,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	exports.__esModule = true;
 	exports.InnerSlider = undefined;
@@ -416,8 +416,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    _this.adaptHeight = function () {
 	      if (_this.props.adaptiveHeight && _this.list) {
-	        var elem = _this.list.querySelector("[data-index=\"" + _this.state.currentSlide + "\"]");
-	        _this.list.style.height = (0, _innerSliderUtils.getHeight)(elem) + "px";
+	        var elem = _this.list.querySelector('[data-index="' + _this.state.currentSlide + '"]');
+	        _this.list.style.height = (0, _innerSliderUtils.getHeight)(elem) + 'px';
 	      }
 	    };
 
@@ -443,20 +443,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var spec = _extends({ listRef: _this.list, trackRef: _this.track }, _this.props);
 	      _this.updateState(spec, true, function () {
 	        _this.adaptHeight();
-	        _this.props.autoplay && _this.autoPlay("update");
+	        _this.props.autoplay && _this.autoPlay('update');
 	      });
-	      if (_this.props.lazyLoad === "progressive") {
+	      if (_this.props.lazyLoad === 'progressive') {
 	        _this.lazyLoadTimer = setInterval(_this.progressiveLazyLoad, 1000);
 	      }
 	      _this.ro = new _resizeObserverPolyfill2.default(function (entries) {
-	        if (_this.state.animating) {
-	          _this.onWindowResized(false); // don't set trackStyle hence don't break animation
-	          _this.callbackTimers.push(setTimeout(function () {
-	            return _this.onWindowResized();
-	          }, _this.props.speed));
-	        } else {
-	          _this.onWindowResized();
-	        }
+	        // if (this.state.animating) {
+	        //   this.onWindowResized(false); // don't set trackStyle hence don't break animation
+	        //   this.callbackTimers.push(
+	        //     setTimeout(() => this.onWindowResized(), this.props.speed)
+	        //   );
+	        // } else {
+	        _this.onWindowResized();
+	        // }
 
 	        // find the relevant observed target
 	        var listEntry = entries.find(function (entry) {
@@ -467,7 +467,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	      });
 	      _this.ro.observe(_this.list);
-	      Array.prototype.forEach.call(document.querySelectorAll(".slick-slide"), function (slide) {
+	      Array.prototype.forEach.call(document.querySelectorAll('.slick-slide'), function (slide) {
 	        slide.onfocus = _this.props.pauseOnFocus ? _this.onSlideFocus : null;
 	        slide.onblur = _this.props.pauseOnFocus ? _this.onSlideBlur : null;
 	      });
@@ -476,9 +476,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return;
 	      }
 	      if (window.addEventListener) {
-	        window.addEventListener("resize", _this.onWindowResized);
+	        window.addEventListener('resize', _this.onWindowResized);
 	      } else {
-	        window.attachEvent("onresize", _this.onWindowResized);
+	        window.attachEvent('onresize', _this.onWindowResized);
 	      }
 	    };
 
@@ -496,9 +496,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _this.callbackTimers = [];
 	      }
 	      if (window.addEventListener) {
-	        window.removeEventListener("resize", _this.onWindowResized);
+	        window.removeEventListener('resize', _this.onWindowResized);
 	      } else {
-	        window.detachEvent("onresize", _this.onWindowResized);
+	        window.detachEvent('onresize', _this.onWindowResized);
 	      }
 	      if (_this.autoplayTimer) {
 	        clearInterval(_this.autoplayTimer);
@@ -529,7 +529,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          setTrackStyle = true;
 	          break;
 	        }
-	        if (_typeof(nextProps[key]) === "object" || typeof nextProps[key] === "function") {
+	        if (_typeof(nextProps[key]) === 'object' || typeof nextProps[key] === 'function') {
 	          continue;
 	        }
 	        if (nextProps[key] !== _this.props[key]) {
@@ -540,15 +540,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      _this.updateState(spec, setTrackStyle, function () {
 	        if (_this.state.currentSlide >= _react2.default.Children.count(nextProps.children)) {
 	          _this.changeSlide({
-	            message: "index",
+	            message: 'index',
 	            index: _react2.default.Children.count(nextProps.children) - nextProps.slidesToShow,
 	            currentSlide: _this.state.currentSlide
 	          });
 	        }
 	        if (nextProps.autoplay) {
-	          _this.autoPlay("update");
+	          _this.autoPlay('update');
 	        } else {
-	          _this.pause("paused");
+	          _this.pause('paused');
 	        }
 	      });
 	    };
@@ -592,7 +592,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        trackRef: _this.track
 	      }, _this.props, _this.state);
 	      _this.updateState(spec, setTrackStyle, function () {
-	        if (_this.props.autoplay) _this.autoPlay("update");else _this.pause("paused");
+	        if (_this.props.autoplay) _this.autoPlay('update');else _this.pause('paused');
 	      });
 	      // animating state should be cleared while resizing, otherwise autoplay stops working
 	      _this.setState({
@@ -609,7 +609,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      spec = _extends({}, spec, { left: targetLeft });
 	      var trackStyle = (0, _innerSliderUtils.getTrackCSS)(spec);
 	      if (setTrackStyle || _react2.default.Children.count(_this.props.children) !== _react2.default.Children.count(spec.children)) {
-	        updatedState["trackStyle"] = trackStyle;
+	        updatedState['trackStyle'] = trackStyle;
 	      }
 	      _this.setState(updatedState, callback);
 	    };
@@ -640,12 +640,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	          _trackLeft += childrenWidths[_i3];
 	        }
 	        var _trackStyle = {
-	          width: _trackWidth + "px",
-	          left: -_trackLeft + "px"
+	          width: _trackWidth + 'px',
+	          left: -_trackLeft + 'px'
 	        };
 	        if (_this.props.centerMode) {
-	          var currentWidth = childrenWidths[_this.state.currentSlide] + "px";
-	          _trackStyle.left = "calc(" + _trackStyle.left + " + (100% - " + currentWidth + ") / 2 ) ";
+	          var currentWidth = childrenWidths[_this.state.currentSlide] + 'px';
+	          _trackStyle.left = 'calc(' + _trackStyle.left + ' + (100% - ' + currentWidth + ') / 2 ) ';
 	        }
 	        _this.setState({
 	          trackStyle: _trackStyle
@@ -662,17 +662,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	        trackLeft += (100 - slideWidth * trackWidth / 100) / 2;
 	      }
 	      var trackStyle = {
-	        width: trackWidth + "%",
-	        left: trackLeft + "%"
+	        width: trackWidth + '%',
+	        left: trackLeft + '%'
 	      };
 	      _this.setState({
-	        slideWidth: slideWidth + "%",
+	        slideWidth: slideWidth + '%',
 	        trackStyle: trackStyle
 	      });
 	    };
 
 	    _this.checkImagesLoad = function () {
-	      var images = document.querySelectorAll(".slick-slide img");
+	      var images = document.querySelectorAll('.slick-slide img');
 	      var imagesCount = images.length,
 	          loadedCount = 0;
 	      Array.prototype.forEach.call(images, function (image) {
@@ -769,7 +769,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (!nextState) return;
 	        _this.animationEndCallback = setTimeout(function () {
 	          var animating = nextState.animating,
-	              firstBatch = _objectWithoutProperties(nextState, ["animating"]);
+	              firstBatch = _objectWithoutProperties(nextState, ['animating']);
 
 	          _this.setState(firstBatch, function () {
 	            _this.callbackTimers.push(setTimeout(function () {
@@ -805,7 +805,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    _this.keyHandler = function (e) {
 	      var dir = (0, _innerSliderUtils.keyHandler)(e, _this.props.accessibility, _this.props.rtl);
-	      dir !== "" && _this.changeSlide({ message: dir });
+	      dir !== '' && _this.changeSlide({ message: dir });
 	    };
 
 	    _this.selectHandler = function (options) {
@@ -830,7 +830,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _this.disableBodyScroll();
 	      }
 	      var state = (0, _innerSliderUtils.swipeStart)(e, _this.props.swipe, _this.props.draggable);
-	      state !== "" && _this.setState(state);
+	      state !== '' && _this.setState(state);
 	    };
 
 	    _this.swipeMove = function (e) {
@@ -840,7 +840,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        slideIndex: _this.state.currentSlide
 	      }));
 	      if (!state) return;
-	      if (state["swiping"]) {
+	      if (state['swiping']) {
 	        _this.clickable = false;
 	      }
 	      _this.setState(state);
@@ -853,8 +853,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        slideIndex: _this.state.currentSlide
 	      }));
 	      if (!state) return;
-	      var triggerSlideHandler = state["triggerSlideHandler"];
-	      delete state["triggerSlideHandler"];
+	      var triggerSlideHandler = state['triggerSlideHandler'];
+	      delete state['triggerSlideHandler'];
 	      _this.setState(state);
 	      if (triggerSlideHandler === undefined) return;
 	      _this.slideHandler(triggerSlideHandler);
@@ -868,13 +868,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // to make sure initialize setState has happened before
 	      // any of such methods are called
 	      _this.callbackTimers.push(setTimeout(function () {
-	        return _this.changeSlide({ message: "previous" });
+	        return _this.changeSlide({ message: 'previous' });
 	      }, 0));
 	    };
 
 	    _this.slickNext = function () {
 	      _this.callbackTimers.push(setTimeout(function () {
-	        return _this.changeSlide({ message: "next" });
+	        return _this.changeSlide({ message: 'next' });
 	      }, 0));
 	    };
 
@@ -882,10 +882,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var dontAnimate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
 	      slide = Number(slide);
-	      if (isNaN(slide)) return "";
+	      if (isNaN(slide)) return '';
 	      _this.callbackTimers.push(setTimeout(function () {
 	        return _this.changeSlide({
-	          message: "index",
+	          message: 'index',
 	          index: slide,
 	          currentSlide: _this.state.currentSlide
 	        }, dontAnimate);
@@ -912,21 +912,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	        clearInterval(_this.autoplayTimer);
 	      }
 	      var autoplaying = _this.state.autoplaying;
-	      if (playType === "update") {
-	        if (autoplaying === "hovered" || autoplaying === "focused" || autoplaying === "paused") {
+	      if (playType === 'update') {
+	        if (autoplaying === 'hovered' || autoplaying === 'focused' || autoplaying === 'paused') {
 	          return;
 	        }
-	      } else if (playType === "leave") {
-	        if (autoplaying === "paused" || autoplaying === "focused") {
+	      } else if (playType === 'leave') {
+	        if (autoplaying === 'paused' || autoplaying === 'focused') {
 	          return;
 	        }
-	      } else if (playType === "blur") {
-	        if (autoplaying === "paused" || autoplaying === "hovered") {
+	      } else if (playType === 'blur') {
+	        if (autoplaying === 'paused' || autoplaying === 'hovered') {
 	          return;
 	        }
 	      }
 	      _this.autoplayTimer = setInterval(_this.play, _this.props.autoplaySpeed + 50);
-	      _this.setState({ autoplaying: "playing" });
+	      _this.setState({ autoplaying: 'playing' });
 	    };
 
 	    _this.pause = function (pauseType) {
@@ -935,51 +935,51 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _this.autoplayTimer = null;
 	      }
 	      var autoplaying = _this.state.autoplaying;
-	      if (pauseType === "paused") {
-	        _this.setState({ autoplaying: "paused" });
-	      } else if (pauseType === "focused") {
-	        if (autoplaying === "hovered" || autoplaying === "playing") {
-	          _this.setState({ autoplaying: "focused" });
+	      if (pauseType === 'paused') {
+	        _this.setState({ autoplaying: 'paused' });
+	      } else if (pauseType === 'focused') {
+	        if (autoplaying === 'hovered' || autoplaying === 'playing') {
+	          _this.setState({ autoplaying: 'focused' });
 	        }
 	      } else {
 	        // pauseType  is 'hovered'
-	        if (autoplaying === "playing") {
-	          _this.setState({ autoplaying: "hovered" });
+	        if (autoplaying === 'playing') {
+	          _this.setState({ autoplaying: 'hovered' });
 	        }
 	      }
 	    };
 
 	    _this.onDotsOver = function () {
-	      return _this.props.autoplay && _this.pause("hovered");
+	      return _this.props.autoplay && _this.pause('hovered');
 	    };
 
 	    _this.onDotsLeave = function () {
-	      return _this.props.autoplay && _this.state.autoplaying === "hovered" && _this.autoPlay("leave");
+	      return _this.props.autoplay && _this.state.autoplaying === 'hovered' && _this.autoPlay('leave');
 	    };
 
 	    _this.onTrackOver = function () {
-	      return _this.props.autoplay && _this.pause("hovered");
+	      return _this.props.autoplay && _this.pause('hovered');
 	    };
 
 	    _this.onTrackLeave = function () {
-	      return _this.props.autoplay && _this.state.autoplaying === "hovered" && _this.autoPlay("leave");
+	      return _this.props.autoplay && _this.state.autoplaying === 'hovered' && _this.autoPlay('leave');
 	    };
 
 	    _this.onSlideFocus = function () {
-	      return _this.props.autoplay && _this.pause("focused");
+	      return _this.props.autoplay && _this.pause('focused');
 	    };
 
 	    _this.onSlideBlur = function () {
-	      return _this.props.autoplay && _this.state.autoplaying === "focused" && _this.autoPlay("blur");
+	      return _this.props.autoplay && _this.state.autoplaying === 'focused' && _this.autoPlay('blur');
 	    };
 
 	    _this.render = function () {
-	      var className = (0, _classnames2.default)("slick-slider", _this.props.className, {
-	        "slick-vertical": _this.props.vertical,
-	        "slick-initialized": true
+	      var className = (0, _classnames2.default)('slick-slider', _this.props.className, {
+	        'slick-vertical': _this.props.vertical,
+	        'slick-initialized': true
 	      });
 	      var spec = _extends({}, _this.props, _this.state);
-	      var trackProps = (0, _innerSliderUtils.extractObject)(spec, ["fade", "cssEase", "speed", "infinite", "centerMode", "focusOnSelect", "currentSlide", "lazyLoad", "lazyLoadedList", "rtl", "slideWidth", "slideHeight", "listHeight", "vertical", "slidesToShow", "slidesToScroll", "slideCount", "trackStyle", "variableWidth", "unslick", "centerPadding"]);
+	      var trackProps = (0, _innerSliderUtils.extractObject)(spec, ['fade', 'cssEase', 'speed', 'infinite', 'centerMode', 'focusOnSelect', 'currentSlide', 'lazyLoad', 'lazyLoadedList', 'rtl', 'slideWidth', 'slideHeight', 'listHeight', 'vertical', 'slidesToShow', 'slidesToScroll', 'slideCount', 'trackStyle', 'variableWidth', 'unslick', 'centerPadding']);
 	      var pauseOnHover = _this.props.pauseOnHover;
 
 	      trackProps = _extends({}, trackProps, {
@@ -991,7 +991,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      var dots;
 	      if (_this.props.dots === true && _this.state.slideCount >= _this.props.slidesToShow) {
-	        var dotProps = (0, _innerSliderUtils.extractObject)(spec, ["dotsClass", "slideCount", "slidesToShow", "currentSlide", "slidesToScroll", "clickHandler", "children", "customPaging", "infinite", "appendDots"]);
+	        var dotProps = (0, _innerSliderUtils.extractObject)(spec, ['dotsClass', 'slideCount', 'slidesToShow', 'currentSlide', 'slidesToScroll', 'clickHandler', 'children', 'customPaging', 'infinite', 'appendDots']);
 	        var pauseOnDotsHover = _this.props.pauseOnDotsHover;
 
 	        dotProps = _extends({}, dotProps, {
@@ -1004,7 +1004,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 
 	      var prevArrow, nextArrow;
-	      var arrowProps = (0, _innerSliderUtils.extractObject)(spec, ["infinite", "centerMode", "currentSlide", "slideCount", "slidesToShow", "prevArrow", "nextArrow"]);
+	      var arrowProps = (0, _innerSliderUtils.extractObject)(spec, ['infinite', 'centerMode', 'currentSlide', 'slideCount', 'slidesToShow', 'prevArrow', 'nextArrow']);
 	      arrowProps.clickHandler = _this.changeSlide;
 
 	      if (_this.props.arrows) {
@@ -1025,13 +1025,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (_this.props.vertical === false) {
 	        if (_this.props.centerMode === true) {
 	          centerPaddingStyle = {
-	            padding: "0px " + _this.props.centerPadding
+	            padding: '0px ' + _this.props.centerPadding
 	          };
 	        }
 	      } else {
 	        if (_this.props.centerMode === true) {
 	          centerPaddingStyle = {
-	            padding: _this.props.centerPadding + " 0px"
+	            padding: _this.props.centerPadding + ' 0px'
 	          };
 	        }
 	      }
@@ -1039,7 +1039,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var listStyle = _extends({}, verticalHeightStyle, centerPaddingStyle);
 	      var touchMove = _this.props.touchMove;
 	      var listProps = {
-	        className: "slick-list",
+	        className: 'slick-list',
 	        style: listStyle,
 	        onClick: _this.clickHandler,
 	        onMouseDown: touchMove ? _this.swipeStart : null,
@@ -1055,19 +1055,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      var innerSliderProps = {
 	        className: className,
-	        dir: "ltr"
+	        dir: 'ltr'
 	      };
 
 	      if (_this.props.unslick) {
-	        listProps = { className: "slick-list" };
+	        listProps = { className: 'slick-list' };
 	        innerSliderProps = { className: className };
 	      }
 	      return _react2.default.createElement(
-	        "div",
+	        'div',
 	        innerSliderProps,
-	        !_this.props.unslick ? prevArrow : "",
+	        !_this.props.unslick ? prevArrow : '',
 	        _react2.default.createElement(
-	          "div",
+	          'div',
 	          _extends({ ref: _this.listRefHandler }, listProps),
 	          _react2.default.createElement(
 	            _track.Track,
@@ -1075,8 +1075,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            _this.props.children
 	          )
 	        ),
-	        !_this.props.unslick ? nextArrow : "",
-	        !_this.props.unslick ? dots : ""
+	        !_this.props.unslick ? nextArrow : '',
+	        !_this.props.unslick ? dots : ''
 	      );
 	    };
 
