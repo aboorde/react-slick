@@ -209,7 +209,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      // Register media query for full screen. Need to support resize from small to large
 	      // convert javascript object to media query string
-	      var query = (0, _json2mq2.default)({ minWidth: breakpoints.slice(-1)[0] });
+	      var query = (0, _json2mq2.default)({ minWidth: breakpoints.slice(-1)[0] + 1 });
 
 	      (0, _innerSliderUtils.canUseDOM)() && this.media(query, function () {
 	        _this2.setState({ breakpoint: null });
